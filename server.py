@@ -1,5 +1,7 @@
 import tornado.web
 import tornado.ioloop
+from database_connect import sqldb
+
 
 class registerRequestHandler(tornado.web.RequestHandler):
 
@@ -13,12 +15,11 @@ class registerRequestHandler(tornado.web.RequestHandler):
         position = self.get_argument('positon',"")
         email = self.get_argument('email')
         pas = self.get_argument('password',"")
-        cpas= self.get_argument('conpassword',"")
         phone= self.get_argument('phone',"")
 
-        ### password confirmation check ###
+        sqldb.registration(fname,lname,email,pas,phone,position)
         
-        self.write("Wow " + fname + " you're a " + position +" "+email+" "+phone)
+        self.write("all done")
 class loginRequestHandler(tornado.web.RequestHandler):
     def get(self):
         self.render("login.html")

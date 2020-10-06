@@ -20,7 +20,7 @@
 			</nav>
 		</strong>
 </div>
-<form method="post">
+<form id="form" method="post">
 	<legend> LOGIN</legend>
 	<dir class="forms">
 		<label for="email">EMAIL:</label>
@@ -30,9 +30,32 @@
 		<label for="password">PASSWORD:</label>
         <input type="password" id="password" name="password" size="40">
     </div>
-    <div class="forms">
-		<button id="login" name="login">LOGIN</button>
-    </div>
+    <div id="logerror"></div>
+    <button type="submit" id="login" name="login">LOGIN</button>
+    
 </form>
+<script type="text/javascript">
+	const email=document.getElementById('email')
+	const password=document.getElementById('password')
+	const form=document.getElementById('form')
+	const error=document.getElementById('logerror')
+
+	form.addEventListener('submit',(e) => {
+		let messages= []
+		if (email.value ===''|| email.value==null){
+			messages.push('EMAIL is required')
+		}
+		if (password.value ===''|| password.value==null){
+			messages.push('PASSWORD is required')
+		}
+		if(messages.length>0){
+			e.preventDefault()
+			error.innerText = messages.join(', ')
+		}
+	})
+
+
+
+</script>
 </body>
 </html>

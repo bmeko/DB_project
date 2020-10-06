@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 	<title>REGISTRATION FORM</title>
+
 </head>
 <body>
 <div class="container">
@@ -21,7 +22,7 @@
 			</nav>
 		</strong>
 </div>
-<form method="post">
+<form id="form" method="post">
 	<legend> REGISTRATION FORM</legend>
 	<div class="forms">
 	
@@ -30,8 +31,8 @@
         <label for="lname">Last name:</label>
     	<input type="text" id="lname" name="lname" size="20">
 	</div>
-
-	<div class="forms" enctype="multipart/form-data">
+	<div id="nameerror"></div>
+	<div class="forms" >
 		<label for="positon">POSITION:</label>
 		<select name="positon" id="positon">
 			<option value="VIEWER">VIEWER</option>
@@ -42,6 +43,7 @@
 		<label for="email">EMAIL:</label>
         <input type="text" id="email" name="email" size="40">
     </div>
+    <div id="emailerror"></div>
     <div class="forms">
 		<label for="password">PASSWORD:</label>
         <input type="password" id="password" name="password" size="40">
@@ -50,13 +52,55 @@
 		<label for="conpassword">CONFIRM PASSWORD:</label>
         <input type="password" id="conpassword" name="conpassword" size="40">
     </div>
+    <div id="passerror"></div>
     <div class="forms">
 		<label for="phone">PHONENUMBER:</label>
         <input type="text" id="phone" name="phone" size="12">
     </div>
-    <div class="forms">
-		<input type="submit" name="button"> 
-    </div>
+    
+		<button type="submit">SUBMIT</button>
+    
 </form>
+<script type="text/javascript">
+	const fname= document.getElementById('fname')
+	const lname= document.getElementById('lname')
+	const email= document.getElementById('email')
+	const pass= document.getElementById('password')
+	const cpass= document.getElementById('conpassword')
+	const position= document.getElementById('positon')
+	const form= document.getElementById('form')
+	const passerror= document.getElementById('passerror')
+	const nameerror= document.getElementById('nameerror')
+	const emailerror= document.getElementById('emailerror')
+
+	form.addEventListener('submit', (e) =>{
+		let messages = []
+		
+		if(fname.value===''|| fname.value==null || lname.value===''||lname.value==null){
+			messages.push('')
+			nameerror.innerText="this fileds can not left empty!!!"
+		}
+		
+		if(email.value==='' || email.value==null){
+			messages.push('')
+			emailerror.innerText="this filed can not left empty!!!"
+		}
+		
+		if(pass.value != cpass.value){
+			messages.push('')
+			passerror.innerText='password does not match!! try again '
+		}
+
+		if(messages.length>0){
+			e.preventDefault()	
+		 	
+		 }
+		
+		
+
+	}) 
+
+
+	</script>
 </body>
 </html>
